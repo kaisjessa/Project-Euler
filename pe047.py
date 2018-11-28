@@ -1,48 +1,51 @@
 import math
+prime_list = []
 
 def is_prime(x):
+	if x in prime_list:
+		return True
 	if(x<2):
 		return False
 	if(x==2):
 		return True
 	if(x%2==0):
 		return False
-	for i in range(3, math.ceil(math.sqrt(x)), 2):
+	for i in range(3, math.ceil(math.sqrt(x))+1, 2):
 		if x % i == 0:
 			return False
+	prime_list.append(x)
 	return True
 
 def prime_factors(x):
 	factors = []
-	current = x
-	n = x
-	while current != 1:
-		if(is_prime(n) and current%n==0):
-			factors.append(n)
-			current = current / n
+	current = 2
+	new_x = x
+	while current <= math.ceil(math.sqrt(x)+1):
+		if new_x % current == 0:
+			factors.append(current)
+			new_x = new_x / current
 		else:
-			n -= 1
+			if(is_prime(new_x)):
+				factors.append(new_x)
+				return(len(list(set(factors))))
+			current += 1
+	return(len(list(set(factors))))
 
-	list = []
-	temp_list = []
-	for e in sorted(factors):
-		if e in temp_list or len(temp_list)==0:
-			temp_list.append(e)
-		else:
-			list.append(temp_list)
-			temp_list = [e]
-	list.append(temp_list)
-	return(list)
-
-found = 0
-index = 1
+found = False
+index = 2*3*5*7
 while not found:
+	if(index % 1000 == 0):
+		print(index)
+	if(prime_factors(index)==4):
+		index += 1
+		if(prime_factors(index)==4):
+			index += 1
+		if(prime_factors(index)==4):
+			index += 1
+		if(prime_factors(index)==4):
+			print(index-3)
+			found = True
 	index += 1
-	f1 = prime_factors(index)
-	f2 = prime_factors(index+1)
-	f3 = prime_factors(index+2)
-	f4 = prime_factors(index+3)
-	if(len(f1)==4 and len(f2)==4 and len(f3)==4 and len(f4)==4):
-		print(set(f1).intersection(set(f2),set(f3),set(f4)))
+
 
 

@@ -2,6 +2,10 @@ import math
 
 def isPrime(x):
 	temp = int(math.sqrt(x)+1)
+	if x < 2:
+		return False
+	if x == 2:
+		return True
 	if x%2==0:
 		return False
 	for i in range(3,temp,2):
