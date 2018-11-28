@@ -15,5 +15,4 @@ for a in range(1, 100):
 		if(s==arr and x not in used_ints):
 			used_ints.append(x)
 			total += x
-			print(x)
 print(total)
