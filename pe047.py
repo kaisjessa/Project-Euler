@@ -34,8 +34,6 @@ def prime_factors(x):
 found = False
 index = 2*3*5*7
 while not found:
-	if(index % 1000 == 0):
-		print(index)
 	if(prime_factors(index)==4):
 		index += 1
 		if(prime_factors(index)==4):
