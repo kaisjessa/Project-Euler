@@ -19,4 +19,4 @@ def cycle(x):
 			increment += 2
 	return(total)
 
-print(cycle(1001))
+print(cycle(10))
