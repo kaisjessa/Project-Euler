@@ -32,6 +32,6 @@ total = 0
 for k in range(len(arr)):
 	words.append(chr(arr[k] ^ ord(alph[chars[k%3]])))
 	total += arr[k] ^ ord(alph[chars[k%3]])
-print(''.join(words))
+#print(''.join(words))
 print(total)
 	
