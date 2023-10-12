@@ -1,31 +1,24 @@
 import math
 
-def prime_factors(x):
-	factors = []
-	current = 2
-	new_x = x
-	while current <= math.ceil(math.sqrt(x)+1):
-		if new_x % current == 0:
-			factors.append(current)
-			new_x = new_x / current
-		else:
-			current += 1
-	if(new_x != 1):
-		factors.append(int(new_x))
-	return list(set(factors))
+def sieve(n):
+    is_prime = [True for i in range(0, n+1)]
+    is_prime[0] = False
+    is_prime[1] = False
+    primes = []
 
-def euler(n):
-	facts = prime_factors(n)
-	prod = 1
-	for fact in facts:
-		prod *= (1-1/fact)
-	return int(n*prod)
+    while(True in is_prime):
+        p = is_prime.index(True)
+        primes.append(p)
+        for i in range(p, len(is_prime), p):
+            is_prime[i] = False
+    return(primes)
 
-nphi = 0
-maxn = 0
-for n in range(10**6, 0, -1):
-	temp = n/euler(n)
-	if temp > nphi:
-		nphi = temp
-		maxn = n
-print(maxn)
+
+if(__name__ == "__main__"):
+    primes = sieve(10**3)
+    n = 1
+    i = 0
+    while(n*primes[i] <= 10**6):
+        n *= primes[i]
+        i += 1
+    print(n)
