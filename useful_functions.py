@@ -93,3 +93,14 @@ def phi(n):
     for p in unique_prime_factors(n):
         r *= (1 - 1/p)
     return(int(r))
+
+
+"""
+greatst common divisor of a and b
+"""
+def gcd(a,b):
+    while(b != 0):
+        t = b
+        b = a % b
+        a = t
+    return(a)
