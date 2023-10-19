@@ -1,7 +1,7 @@
 import math 
 
 matrix = []
-with open("pe081_matrix.txt", "r") as f:
+with open("pe082_matrix.txt", "r") as f:
     for line in f.readlines():
         matrix.append([int(i) for i in line.strip().split(',')])
 
