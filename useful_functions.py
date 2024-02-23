@@ -65,8 +65,9 @@ def prime_factors(n):
     m = 2
     while(m <= n):
         while(n % m == 0):
+            print(m)
             l.append(m)
-            n /= m
+            n //= m
         m = next_prime(m)
     return(l)
 
@@ -77,7 +78,7 @@ def unique_prime_factors(n):
         if(n % m == 0):
             l.append(m)
             while(n % m == 0):
-                n /= m
+                n //= m
         m = next_prime(m)
     return(l)
 
