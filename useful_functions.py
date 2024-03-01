@@ -24,15 +24,21 @@ Returns True if x is prime, false otherwise
 prime_list: optional argument containing list of known primes
 """
 def is_prime(x, prime_list=[]):
-    if(x==2 or x in prime_list):
+    if(x < 4):
+        return x > 1
+    if(x in prime_list):
         return True
     if(len(prime_list) > 0 and x < prime_list[-1] and x not in prime_list):
         return False
-    if(x<2 or x%2==0):
+    if(x%2 == 0 or x%3 == 0):
         return False
-    for i in range(3, math.isqrt(x)+1, 2):
-        if x % i == 0:
+    upper = math.isqrt(x)+1
+    # check 6k +- 1
+    k = 1
+    while(6*k-1 <= upper):
+        if(x % (6*k-1) == 0 or x % (6*k+1) == 0):
             return False
+        k += 1
     return True
 
 """
