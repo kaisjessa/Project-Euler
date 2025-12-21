@@ -1,4 +1,5 @@
 import math
+import random
 
 """
 Sieve of Eratosthenes
@@ -48,7 +49,7 @@ def is_prime(x, prime_list=[]):
 
 
 """
-given prime p, determine the next prime
+given prime p0, determine the next prime
 """
 
 
@@ -132,9 +133,19 @@ def gcd(a, b):
     return math.gcd(a, b)
 
 
+"""
+Returns True if n is a perfect square, False otherwise
+"""
+
+
 def is_perfect_square(n):
     sqrtn = math.isqrt(n)
     return sqrtn * sqrtn == n
+
+
+"""
+Returns list of Fibonacci numbers up to num
+"""
 
 
 def fibonacci_numbers(num):
@@ -142,3 +153,34 @@ def fibonacci_numbers(num):
     for i in range(2, num + 1):
         fibs.append(fibs[i - 1] + fibs[i - 2])
     return fibs
+
+
+"""
+Returns True if n is *probably* prime, False otherwise
+probabilistic primality test
+much faster than deterministic
+only use deterministic after passing this test
+"""
+
+
+def miller_rabin(n, k=3):
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    s = 0
+    d = n - 1
+    while d % 2 == 0:
+        s += 1
+        d //= 2
+    for _ in range(k):
+        a = random.randint(2, n - 2)
+        x = pow(a, d, n)
+        for _ in range(s):
+            y = pow(x, 2, n)
+            if y == 1 and x != 1 and x != n - 1:
+                return False
+            x = y
+        if y != 1:
+            return False
+    return True
